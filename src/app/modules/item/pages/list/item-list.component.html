@@ -1,0 +1,26 @@
+<div>
+    <p>Item list</p>
+
+    <mat-form-field>
+        <mat-label>Type of items</mat-label>
+        <mat-select [(value)]="selectedType">
+            @for (item of options; track item.key) {
+            <mat-option [value]="item.key">{{item.text}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    @switch(selectedType()) {
+        @case('food') {
+            <food-list />
+        }
+
+        @case('potion') {
+            <potion-list />
+        }
+
+        @default() {
+            Still in development
+        }
+    }
+</div>
