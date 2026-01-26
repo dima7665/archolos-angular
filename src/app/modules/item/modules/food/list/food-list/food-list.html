@@ -1,5 +1,3 @@
 <p>Food</p>
 
-@for (item of items(); track item.id) {
-<p>{{item.name}}</p>
-}
+<food-table [items]="items()"></food-table>

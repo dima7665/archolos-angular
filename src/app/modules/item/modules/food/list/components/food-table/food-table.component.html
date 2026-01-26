@@ -1,0 +1,17 @@
+<table table="50px 2fr 1fr 2fr 2fr">
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Price</td>
+			<td>Description</td>
+			<td>Stat</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		@for (item of items(); track item.id) {
+			<tr foodTableRow [item]="item"></tr>
+		}
+	</tbody>
+</table>

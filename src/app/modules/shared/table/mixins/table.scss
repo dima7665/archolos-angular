@@ -42,6 +42,9 @@
 			padding-top: 10px;
 			padding-bottom: 10px;
 
+			display: grid;
+			grid-template-columns: var(--table-template-columns);
+
 			&:not(:last-child) {
 				border-bottom: 1px solid darkslategray;
 			}

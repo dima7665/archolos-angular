@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Subject, switchMap } from 'rxjs';
 import { FoodApi } from '../../api/food.api';
 import { FoodItem } from '../../interfaces/food.interface';
+import { FoodTable } from "../components/food-table/food-table.component";
 
 @Component({
 	selector: 'food-list',
-	imports: [],
+	imports: [FoodTable],
 	templateUrl: './food-list.html',
 	styleUrl: './food-list.scss',
   host: {class: 'd-block'},
