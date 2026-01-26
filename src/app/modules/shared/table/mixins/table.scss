@@ -1,0 +1,59 @@
+@mixin table {
+	display: grid;
+	border-radius: 8px;
+	background-color: azure;
+	border: 1px solid darkslategray;
+
+	&::ng-deep {
+		td,
+		th {
+			text-align: start;
+		}
+
+		thead {
+			display: grid;
+			align-items: center;
+			min-height: 45px;
+			font-weight: 600;
+			background-color: bisque;
+			border-radius: 8px 8px 0 0;
+		}
+
+		tfoot {
+			display: grid;
+			align-items: center;
+
+			tr {
+				grid-row-gap: 20px;
+				// grid-template-columns: var(--table-footer-columns);
+			}
+		}
+
+		thead,
+		tbody,
+		tfoot {
+			&:not(:last-child) {
+				border-bottom: 1px solid darkslategray;
+			}
+		}
+
+		tr {
+			align-items: center;
+			padding-top: 10px;
+			padding-bottom: 10px;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid darkslategray;
+			}
+		}
+
+		th {
+			font-weight: 600;
+		}
+
+		td,
+		th {
+			padding-right: 15px;
+		}
+	}
+}

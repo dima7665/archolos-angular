@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Subject, switchMap } from 'rxjs';
 import { FoodApi } from '../../api/food.api';
+import { FoodItem } from '../../interfaces/food.interface';
 
 @Component({
 	selector: 'food-list',
@@ -10,15 +11,15 @@ import { FoodApi } from '../../api/food.api';
   host: {class: 'd-block'},
 })
 export class FoodList implements OnInit, OnDestroy {
-	private readonly type = 'food';
+	public readonly items = signal<FoodItem[]>([]);
 
 	private readonly loadData$ = new Subject<void>();
 
 	constructor(private readonly foodApi: FoodApi) {}
 
 	public ngOnInit(): void {
-		this.loadData$.pipe(switchMap(() => this.foodApi.list())).subscribe((res) => {
-			console.log('food', res);
+		this.loadData$.pipe(switchMap(() => this.foodApi.list())).subscribe(data => {
+			this.items.set(data)
 		});
 
     this.loadData$.next();

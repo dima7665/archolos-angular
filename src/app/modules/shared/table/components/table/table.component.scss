@@ -1,0 +1,5 @@
+@use '../../mixins/table' as *;
+
+:host {
+	@include table;
+}

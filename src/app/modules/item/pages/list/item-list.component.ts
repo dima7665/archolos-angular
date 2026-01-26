@@ -17,6 +17,7 @@ const itemOptions = [
 @Component({
 	selector: 'item-list',
 	templateUrl: './item-list.component.html',
+	styleUrl: './item-list.component.scss',
 	imports: [MatSelect, MatFormField, MatLabel, MatOption, FoodList, PotionList],
 })
 export class ItemListComponent {

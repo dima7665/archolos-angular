@@ -1,0 +1,47 @@
+<table table>
+	<thead>
+		<tr>
+			<td>ID</td>
+			<td>Potion name</td>
+			<td>Price</td>
+			<td>Description</td>
+			<td>Stat</td>
+			<td>Stat value</td>
+		</tr>
+	</thead>
+
+	<tbody>
+		@for (item of items(); track item.id) {
+			<tr potionTableRow [item]="item"></tr>
+		}
+	</tbody>
+</table>
+
+<!-- <table mat-table [dataSource]="items()">
+	<ng-container matColumnDef="id">
+		<th mat-header-cell *matHeaderCellDef>ID</th>
+		<td mat-cell *matCellDef="let element">{{ element.id }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="name">
+		<th mat-header-cell *matHeaderCellDef>Name</th>
+		<td mat-cell *matCellDef="let element">{{ element.name }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="price">
+		<th mat-header-cell *matHeaderCellDef>Price</th>
+		<td mat-cell *matCellDef="let element">{{ element.price }}</td>
+	</ng-container>
+
+	<ng-container matColumnDef="stats">
+		<th mat-header-cell *matHeaderCellDef>Stats</th>
+		<td mat-cell *matCellDef="let element">
+            @for (stat of element.consumableStats; track stat.id) {
+            <p>{{stat.stat}}: {{stat.value}}</p>
+            }
+        </td>
+	</ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->
