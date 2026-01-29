@@ -1,0 +1,18 @@
+:host {
+    border: 1px solid blue;
+    background-color: khaki;
+
+    display: block;
+    min-height: 100px;
+    min-width: 300px;
+}
+
+.login-form {
+    width: 300px;
+    padding: 10px;
+
+    & > * {
+        display: flex;
+        justify-content: space-between;
+    }
+}

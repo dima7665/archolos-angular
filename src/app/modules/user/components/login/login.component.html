@@ -1,0 +1,23 @@
+@if (user()) {
+	{{ user()!.email }}
+
+	<button (click)="logout()">Log out</button>
+} @else {
+	<div [formGroup]="loginFormGroup" class="login-form">
+		<p>
+            Email: 
+            <input formControlName="email" type="email" />
+        </p>
+		
+        <p>
+            Password: 
+            <input formControlName="password" type="password" />
+        </p>
+	</div>
+
+	<button (click)="login()">Log in</button>
+}
+
+<div>
+	<button (click)="test()">TEST</button>
+</div>
