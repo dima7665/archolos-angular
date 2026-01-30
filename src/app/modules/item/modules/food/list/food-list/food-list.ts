@@ -2,16 +2,16 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Subject, switchMap } from 'rxjs';
 import { FoodApi } from '../../api/food.api';
 import { FoodItem } from '../../interfaces/food.interface';
-import { FoodTable } from "../components/food-table/food-table.component";
+import { FoodTableComponent } from "../components/food-table/food-table.component";
 
 @Component({
 	selector: 'food-list',
-	imports: [FoodTable],
+	imports: [FoodTableComponent],
 	templateUrl: './food-list.html',
 	styleUrl: './food-list.scss',
   host: {class: 'd-block'},
 })
-export class FoodList implements OnInit, OnDestroy {
+export class FoodListComponent implements OnInit, OnDestroy {
 	public readonly items = signal<FoodItem[]>([]);
 
 	private readonly loadData$ = new Subject<void>();

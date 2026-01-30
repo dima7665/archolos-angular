@@ -5,6 +5,6 @@ import { FoodItem } from '../../../interfaces/food.interface';
 	selector: 'tr[foodTableRow]',
 	templateUrl: './food-table-row.component.html',
 })
-export class FoodTableRow {
+export class FoodTableRowComponent {
 	public readonly item = input.required<FoodItem>();
 }

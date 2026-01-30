@@ -10,17 +10,5 @@
         </mat-select>
     </mat-form-field>
 
-    @switch(selectedType()) {
-        @case('food') {
-            <food-list />
-        }
-
-        @case('potion') {
-            <potion-list />
-        }
-
-        @default() {
-            <p>Still in development</p>
-        }
-    }
+    <router-outlet></router-outlet>
 </div>

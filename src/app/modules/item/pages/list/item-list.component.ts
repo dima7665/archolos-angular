@@ -1,28 +1,25 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
+import { ActivatedRoute, Route, Router, RouterOutlet } from '@angular/router';
 import { MatFormField, MatSelect, MatLabel, MatOption } from '@angular/material/select';
-import { FoodList } from "../../modules/food/list/food-list/food-list";
-import { PotionList } from "../../modules/potion/list/potion-list/potion-list";
-
-const itemOptions = [
-	{ key: 'food', text: 'Food' },
-	{ key: 'potion', text: 'Potions' },
-	{ key: 'recipe', text: 'Recipes' },
-	{ key: 'weapon', text: 'Weapons' },
-	{ key: 'armor', text: 'Armors' },
-	{ key: 'jewelry', text: 'Jewelry' },
-	{ key: 'scroll', text: 'Scrolls' },
-	{ key: 'misc', text: 'Other' },
-];
+import { itemTypeOptions } from '../../constants/item-option';
 
 @Component({
 	selector: 'item-list',
 	templateUrl: './item-list.component.html',
 	styleUrl: './item-list.component.scss',
-	imports: [MatSelect, MatFormField, MatLabel, MatOption, FoodList, PotionList],
+	imports: [MatSelect, MatFormField, MatLabel, MatOption, RouterOutlet],
 })
 export class ItemListComponent {
-	public readonly options = itemOptions;
+	public readonly options = itemTypeOptions;
 
 	public readonly selectedType = signal(this.options[0].key);
 
+	constructor(
+		private readonly router: Router,
+		private readonly route: ActivatedRoute
+	) {
+		effect(() => {
+			this.router.navigate([this.selectedType()], { relativeTo: this.route });
+		});
+	}
 }

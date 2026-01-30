@@ -2,15 +2,15 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Subject, switchMap } from 'rxjs';
 import { PotionApi } from '../../api/potion.api';
 import { PotionItem } from '../../interfaces/potion.interface';
-import { PotionTable } from "../../components/potion-table/potion-table.component";
+import { PotionTableComponent } from "../../components/potion-table/potion-table.component";
 
 @Component({
 	selector: 'potion-list',
-	imports: [PotionTable],
+	imports: [PotionTableComponent],
 	templateUrl: './potion-list.html',
 	styleUrl: './potion-list.scss',
 })
-export class PotionList implements OnInit, OnDestroy {
+export class PotionListComponent implements OnInit, OnDestroy {
 	public readonly items = signal<PotionItem[]>([]);
 
 	private readonly loadData$ = new Subject<void>();

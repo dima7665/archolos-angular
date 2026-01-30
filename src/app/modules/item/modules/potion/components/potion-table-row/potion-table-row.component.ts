@@ -5,6 +5,6 @@ import { PotionItem } from "../../interfaces/potion.interface";
     selector: 'tr[potionTableRow]',
     templateUrl: './potion-table-row.component.html',
 })
-export class PotionTableRow {
+export class PotionTableRowComponent {
     public readonly item = input.required<PotionItem>();
 }

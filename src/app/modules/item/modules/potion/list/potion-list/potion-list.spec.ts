@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PotionList } from './potion-list';
+import { PotionListComponent } from './potion-list';
 
 describe('PotionList', () => {
-  let component: PotionList;
-  let fixture: ComponentFixture<PotionList>;
+  let component: PotionListComponent;
+  let fixture: ComponentFixture<PotionListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PotionList]
+      imports: [PotionListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PotionList);
+    fixture = TestBed.createComponent(PotionListComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

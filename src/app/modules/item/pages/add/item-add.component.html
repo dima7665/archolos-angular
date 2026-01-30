@@ -1,0 +1,38 @@
+<form [formGroup]="formGroup" class="form">
+	<mat-form-field>
+		<mat-label>Type</mat-label>
+		<mat-select formControlName="type">
+			@for (type of itemTypeOptions; track type.key) {
+				<mat-option [value]="type.key">{{ type.text }}</mat-option>
+			}
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Name</mat-label>
+		<input matInput formControlName="name" controlValidation />
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Price</mat-label>
+		<input matInput type="number" formControlName="price" />
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Ingame ID</mat-label>
+		<input matInput formControlName="gameItemId" />
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Description</mat-label>
+		<textarea matInput formControlName="description"></textarea>
+	</mat-form-field>
+
+    <mat-form-field>
+		<mat-label>Additional info</mat-label>
+		<textarea matInput formControlName="additionalInfo"></textarea>
+	</mat-form-field>
+</form>
+
+<button (click)="onCancel()">Cancel</button>
+<button (click)="onSubmit()">Add</button>
