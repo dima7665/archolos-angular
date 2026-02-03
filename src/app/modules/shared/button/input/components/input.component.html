@@ -1,0 +1,16 @@
+<mat-form-field [class.invalidValue]="hasErrors()">
+	@if (label()) {
+		<mat-label>{{ label() }}</mat-label>
+	}
+
+	<input
+		matInput
+		[required]="isRequired()"
+		[value]="value()"
+		[placeholder]="placeholder()"
+		(input)="onInput($event)"
+		(blur)="onBlur()"
+	/>
+</mat-form-field>
+
+<validation-error [errors]="errors()" />

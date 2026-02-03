@@ -1,14 +1,18 @@
 <div>
-    <p>Item list</p>
+	<!-- <nav>
+		<a routerLink="add">Create item</a>
+	</nav> -->
 
-    <mat-form-field>
-        <mat-label>Type of items</mat-label>
-        <mat-select [(value)]="selectedType">
-            @for (item of options; track item.key) {
-            <mat-option [value]="item.key">{{item.text}}</mat-option>
-            }
-        </mat-select>
-    </mat-form-field>
+	<p>Item list</p>
 
-    <router-outlet></router-outlet>
+	<mat-form-field>
+		<mat-label>Type of items</mat-label>
+		<mat-select [(value)]="selectedType">
+			@for (item of options; track item.key) {
+				<mat-option [value]="item.key">{{ item.text }}</mat-option>
+			}
+		</mat-select>
+	</mat-form-field>
+
+	<router-outlet></router-outlet>
 </div>

@@ -1,5 +1,5 @@
 import { Component, effect, signal } from '@angular/core';
-import { ActivatedRoute, Route, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { MatFormField, MatSelect, MatLabel, MatOption } from '@angular/material/select';
 import { itemTypeOptions } from '../../constants/item-option';
 
