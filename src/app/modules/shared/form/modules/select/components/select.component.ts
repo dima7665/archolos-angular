@@ -3,45 +3,32 @@ import {
 	AbstractControl,
 	ControlValueAccessor,
 	FormControl,
-	FormsModule,
 	NG_VALIDATORS,
 	NG_VALUE_ACCESSOR,
-	ReactiveFormsModule,
 	ValidationErrors,
 	Validator,
 	Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { ValidationModule } from 'app/modules/shared/validation/validation.module';
-import { ValidationErrorComponent } from 'app/modules/shared/validation/components/validation-error.component';
-import { VALIDATION_CONTROL_ELEMENT } from 'app/modules/shared/validation/token/validation.token';
+import { MatSelectModule } from '@angular/material/select';
 import { ValidationControlElement } from 'app/modules/shared/validation/interfaces/validation.interface';
+import { VALIDATION_CONTROL_ELEMENT } from 'app/modules/shared/validation/token/validation.token';
+import { ValidationModule } from 'app/modules/shared/validation/validation.module';
 
 @Component({
-	selector: 'app-input',
-	templateUrl: './input.component.html',
-	styleUrl: './input.component.scss',
-	imports: [
-		MatFormFieldModule,
-		MatInputModule,
-		ReactiveFormsModule,
-		FormsModule,
-		ValidationModule,
-		ValidationErrorComponent,
-	],
+	selector: 'app-select',
+	templateUrl: './select.component.html',
+	styleUrl: './select.component.scss',
+	imports: [MatFormFieldModule, MatSelectModule, ValidationModule],
 	providers: [
-		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => AppInput), multi: true },
-		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => AppInput), multi: true },
-		{ provide: VALIDATION_CONTROL_ELEMENT, useExisting: AppInput },
+		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => AppSelectComponent), multi: true },
+		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => AppSelectComponent), multi: true },
+		{ provide: VALIDATION_CONTROL_ELEMENT, useExisting: AppSelectComponent },
 	],
 })
-export class AppInput implements ControlValueAccessor, Validator, ValidationControlElement {
-	public readonly label = input('');
-	public readonly placeholder = input('');
-	public readonly type = input<'number' | 'text' | 'email'>('text');
+export class AppSelectComponent implements ControlValueAccessor, Validator, ValidationControlElement {
+	public readonly options = input.required<any[]>();
 
-	// public control = new FormControl('');
 	public control!: FormControl;
 
 	public readonly value = signal('');
@@ -61,7 +48,6 @@ export class AppInput implements ControlValueAccessor, Validator, ValidationCont
 	public readonly isTouched = signal(false);
 
 	public writeValue(value: string | null): void {
-		// this.control.setValue(value, { emitEvent: false });
 		this.value.set(value || '');
 	}
 
@@ -71,11 +57,6 @@ export class AppInput implements ControlValueAccessor, Validator, ValidationCont
 
 	public registerOnTouched(fn: () => void): void {
 		this.onTouch = fn;
-	}
-
-	public test(): void {
-		console.log('test', this.control?.errors);
-		// console.log('test', validate(this.control), this.control.invalid);
 	}
 
 	// cannot inject control because of circular dependency, so get it here

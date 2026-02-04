@@ -1,0 +1,10 @@
+<mat-form-field>
+	<mat-label>Type</mat-label>
+	<mat-select [value]="value()">
+		@for (type of options(); track type.key) {
+			<mat-option [value]="type.key">{{ type.text }}</mat-option>
+		}
+	</mat-select>
+</mat-form-field>
+
+<validation-error [error]="errorMessage()" [isShow]="isShowError()" />

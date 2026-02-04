@@ -1,0 +1,22 @@
+$red: light-dark(#ba1a1a, #ffb4ab);
+
+:host {
+	display: grid;
+    position: relative;
+    margin-bottom: 5px;
+
+	&::ng-deep {
+		.invalidValue {
+			label {
+				color: $red !important;
+			}
+
+			[matformfieldlineripple] {
+				&:before,
+				&:after {
+					border-bottom-color: $red !important;
+				}
+			}
+		}
+	}
+}

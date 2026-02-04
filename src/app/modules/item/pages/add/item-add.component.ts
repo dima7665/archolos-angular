@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { itemTypeOptions } from '../../constants/item-option';
 import { ItemForm } from './forms/item.form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ValidationModule } from 'app/modules/shared/validation/validation.module';
-import { AppInput } from "app/modules/shared/button/input/components/input.component";
+import { AppInputComponent } from 'app/modules/shared/form/modules/input/components/input.component';
+import { AppSelectComponent } from 'app/modules/shared/form/modules/select/components/select.component';
 
 @Component({
 	selector: 'item-add',
 	templateUrl: 'item-add.component.html',
 	styleUrl: 'item-add.component.scss',
-	imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ValidationModule, AppInput],
+	imports: [ReactiveFormsModule, ValidationModule, AppInputComponent, AppSelectComponent],
 })
 export class ItemAddComponent {
 	public formGroup = new ItemForm().formGroup;
@@ -23,11 +21,11 @@ export class ItemAddComponent {
 	constructor(private readonly router: Router) {}
 
 	public onSubmit(): void {
-		console.log('add', this.formGroup.controls.name.invalid, this.formGroup.controls.name.value);
-        // this.formGroup.triggerValidation();
+		console.log('add', this.formGroup.controls.type.invalid, this.formGroup.controls.type.value);
+		// this.formGroup.triggerValidation();
 
-        return;
-        this.router.navigate(['items']);
+		return;
+		this.router.navigate(['items']);
 	}
 
 	public onCancel(): void {

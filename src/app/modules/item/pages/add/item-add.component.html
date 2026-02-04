@@ -1,12 +1,5 @@
 <form [formGroup]="formGroup" class="form">
-	<mat-form-field>
-		<mat-label>Type</mat-label>
-		<mat-select formControlName="type">
-			@for (type of itemTypeOptions; track type.key) {
-				<mat-option [value]="type.key">{{ type.text }}</mat-option>
-			}
-		</mat-select>
-	</mat-form-field>
+	<app-select [options]="itemTypeOptions" formControlName="type"></app-select>
 
 	<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
 
