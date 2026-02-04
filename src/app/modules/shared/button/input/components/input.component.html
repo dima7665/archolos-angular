@@ -7,10 +7,11 @@
 		matInput
 		[required]="isRequired()"
 		[value]="value()"
+        [type]="type()"
 		[placeholder]="placeholder()"
 		(input)="onInput($event)"
 		(blur)="onBlur()"
 	/>
 </mat-form-field>
 
-<validation-error [errors]="errors()" />
+<validation-error [error]="errorMessage()" [isShow]="isShowError()" />

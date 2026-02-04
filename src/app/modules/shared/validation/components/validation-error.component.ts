@@ -1,34 +1,19 @@
-import { Component, effect, input, signal } from '@angular/core';
-import { FormControl, NgControl, ValidationErrors } from '@angular/forms';
+import { Component, input } from '@angular/core';
 import { MatError } from '@angular/material/select';
-import { debounceTime } from 'rxjs';
-import { extractTouches } from '../utils/extract-touches';
 
 @Component({
 	selector: 'validation-error',
 	template: `
-		@if (errorMessage()) {
-			<mat-error>{{ errorMessage() }}</mat-error>
+		@if (isShow() && error()) {
+			<mat-error>{{ error() }}</mat-error>
 		}
 	`,
 	styleUrl: './validation-error.component.scss',
 	imports: [MatError],
 })
 export class ValidationErrorComponent {
-	public readonly errors = input<ValidationErrors | null>(null);
-
-	public errorMessage = signal('');
-
-	constructor() {
-		effect(() => {
-			// console.log('val er - ', this.errors());
-			const errors = Object.entries(this.errors() || {});
-
-			const error = errors.length ? errors[0][0] : '';
-
-			this.errorMessage.set(error);
-		});
-	}
+	public readonly error = input<string | null>(null);
+	public readonly isShow = input(true);
 }
 
 // @Component({

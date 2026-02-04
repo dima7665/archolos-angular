@@ -15,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ValidationModule } from 'app/modules/shared/validation/validation.module';
 import { ValidationErrorComponent } from 'app/modules/shared/validation/components/validation-error.component';
+import { VALIDATION_CONTROL_ELEMENT } from 'app/modules/shared/validation/token/validation.token';
+import { ValidationControlElement } from 'app/modules/shared/validation/interfaces/validation.interface';
 
 @Component({
 	selector: 'app-input',
@@ -31,15 +33,16 @@ import { ValidationErrorComponent } from 'app/modules/shared/validation/componen
 	providers: [
 		{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => AppInput), multi: true },
 		{ provide: NG_VALIDATORS, useExisting: forwardRef(() => AppInput), multi: true },
+		{ provide: VALIDATION_CONTROL_ELEMENT, useExisting: AppInput },
 	],
 })
-export class AppInput implements ControlValueAccessor, Validator {
+export class AppInput implements ControlValueAccessor, Validator, ValidationControlElement {
 	public readonly label = input('');
 	public readonly placeholder = input('');
+	public readonly type = input<'number' | 'text' | 'email'>('text');
 
 	// public control = new FormControl('');
 	public control!: FormControl;
-	public readonly isRequired = signal(false);
 
 	public readonly value = signal('');
 
@@ -48,6 +51,12 @@ export class AppInput implements ControlValueAccessor, Validator {
 
 	public readonly errors = signal<ValidationErrors | null>(null);
 	public readonly hasErrors = computed<boolean>(() => !!this.errors());
+
+	//
+	public errorMessage = signal('');
+	public isShowError = signal(false);
+	public isRequired = signal(false);
+	//
 
 	public readonly isTouched = signal(false);
 
