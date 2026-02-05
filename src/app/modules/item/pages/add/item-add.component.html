@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" class="form">
-	<app-select [options]="itemTypeOptions" formControlName="type"></app-select>
+	<app-select controlValidation [options]="itemTypeOptions" formControlName="type"></app-select>
 
 	<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
 
