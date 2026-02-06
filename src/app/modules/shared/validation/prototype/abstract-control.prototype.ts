@@ -14,7 +14,6 @@ declare module '@angular/forms' {
 AbstractControl.prototype.validationTrigger$ = new Subject();
 
 AbstractControl.prototype.triggerValidation = function (): void {
-    console.log('trigger validation prototype');
 	// Avoid scrolling and touching disabled fields
 	if (this.disabled) {
 		return;

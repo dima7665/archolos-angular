@@ -34,13 +34,14 @@ export class AppInputComponent implements ControlValueAccessor, ValidationContro
 	private isTouched = false;
 
 	private onTouch!: () => void;
-	private onChange!: (value: string | null) => void;
+	private onChange!: (value: string | number | null) => void;
 
 	public writeValue(value: string | null): void {
+		console.log('writeValue', typeof value, value);
 		this.value.set(value || '');
 	}
 
-	public registerOnChange(fn: (value: string | null) => void): void {
+	public registerOnChange(fn: (value: string | number | null) => void): void {
 		this.onChange = fn;
 	}
 
@@ -53,8 +54,10 @@ export class AppInputComponent implements ControlValueAccessor, ValidationContro
 			return;
 		}
 
+		const value = event.target.value.trim();
+
 		this.markAsTouched();
-		this.onChange(event.target.value.trim());
+		this.onChange(this.type() === 'number' ? parseInt(value) : value);
 		this.onTouch();
 	}
 

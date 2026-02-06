@@ -12,5 +12,13 @@
 	<app-input controlValidation label="Additional info" formControlName="additionalInfo"></app-input>
 </form>
 
+@switch (type()) {
+	@case (ItemType.Food)
+	@case (ItemType.Potion) {
+		<consumable-info-form [data]="getConsumableStats()"></consumable-info-form>
+	}
+	@case (ItemType.Weapon) {}
+}
+
 <button (click)="onCancel()">Cancel</button>
 <button (click)="onSubmit()">Add</button>

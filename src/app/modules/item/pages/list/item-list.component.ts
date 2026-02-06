@@ -1,5 +1,5 @@
 import { Component, effect, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatFormField, MatSelect, MatLabel, MatOption } from '@angular/material/select';
 import { itemTypeOptions } from '../../constants/item-option';
 
@@ -7,7 +7,7 @@ import { itemTypeOptions } from '../../constants/item-option';
 	selector: 'item-list',
 	templateUrl: './item-list.component.html',
 	styleUrl: './item-list.component.scss',
-	imports: [MatSelect, MatFormField, MatLabel, MatOption, RouterOutlet],
+	imports: [MatSelect, MatFormField, MatLabel, MatOption, RouterOutlet, RouterLink],
 })
 export class ItemListComponent {
 	public readonly options = itemTypeOptions;

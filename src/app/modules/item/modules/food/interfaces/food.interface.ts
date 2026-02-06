@@ -3,6 +3,8 @@ import { ConsumableStat } from 'app/modules/item/interfaces/consumable.interface
 import { Item } from 'app/modules/item/interfaces/item.interface';
 
 export interface FoodItem extends Item {
-    type: ItemType.Food;
+	type: ItemType.Food;
 	consumableStats: ConsumableStat[];
 }
+
+export type FoodCreateData = Omit<FoodItem, 'id'>;

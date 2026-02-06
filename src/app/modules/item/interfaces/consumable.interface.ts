@@ -1,14 +1,9 @@
 export interface ConsumableStat {
 	consumableId: number;
-
-	duration?: number;
-
-	isPercentage: true;
-
-	isPermanent: false;
-
+	duration?: Nullable<number>;
+	isPercentage: boolean;
+	isPermanent: boolean;
 	stat: ConsumableStatType;
-
 	value: number;
 }
 

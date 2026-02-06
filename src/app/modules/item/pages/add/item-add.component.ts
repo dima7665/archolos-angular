@@ -1,28 +1,64 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { itemTypeOptions } from '../../constants/item-option';
-import { ItemForm } from './forms/item.form';
+import { ItemForm } from '../../form/item.form';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ValidationModule } from 'app/modules/shared/validation/validation.module';
 import { AppInputComponent } from 'app/modules/shared/form/modules/input/components/input.component';
 import { AppSelectComponent } from 'app/modules/shared/form/modules/select/components/select.component';
+import { ItemApi } from '../../api/item.api';
+import { ItemCreateData, ItemIncludes } from '../../interfaces/item.interface';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ItemType } from '../../enums/item-type.enum';
+import { ConsumableInfoFormComponent } from '../../modules/food/components/consumable-info-form/consumable-info-form.component';
+import { ItemFormService } from './service/item-form.service';
+import { ConsumableStat } from '../../interfaces/consumable.interface';
 
 @Component({
 	selector: 'item-add',
 	templateUrl: 'item-add.component.html',
 	styleUrl: 'item-add.component.scss',
-	imports: [ReactiveFormsModule, ValidationModule, AppInputComponent, AppSelectComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [
+		ReactiveFormsModule,
+		ValidationModule,
+		AppInputComponent,
+		AppSelectComponent,
+		ConsumableInfoFormComponent,
+	],
+	providers: [ItemFormService],
 })
 export class ItemAddComponent {
-	public formGroup = new ItemForm().formGroup;
+	public readonly formGroup = new ItemForm({ type: this.route.snapshot.queryParams['type'] }).formGroup;
+
+	public readonly type = toSignal(this.formGroup.controls.type.valueChanges);
+	public readonly stats = signal<Nullable<ItemIncludes>>(null);
 
 	public readonly itemTypeOptions = itemTypeOptions;
+	public readonly ItemType = ItemType;
 
-	constructor(private readonly router: Router) {}
+	constructor(
+		private readonly router: Router,
+		private readonly route: ActivatedRoute,
+		private readonly itemApi: ItemApi,
+		private readonly itemFormService: ItemFormService
+	) {}
 
-	public onSubmit(): void {
-		console.log('add', this.formGroup.controls.type.invalid, this.formGroup.controls.type.value);
-		// this.formGroup.triggerValidation();
+	public async onSubmit(): Promise<void> {
+		// console.log('add', this.itemFormService.invalid, this.itemFormService.getValue(this.type()));
+
+		if (this.formGroup.invalid || this.itemFormService.invalid) {
+			this.formGroup.triggerValidation();
+			this.itemFormService.triggerValidation();
+			return;
+		}
+
+		// console.log('VALID');
+		// return;
+		const res = await this.itemApi.add({...this.formGroup.value, ...this.itemFormService.getValue(this.type())} as ItemCreateData);
+		console.log('submit', res);
+
+		// TODO: could return error if duplicate stats (consumableStats)
 
 		return;
 		this.router.navigate(['items']);
@@ -30,5 +66,14 @@ export class ItemAddComponent {
 
 	public onCancel(): void {
 		this.router.navigate(['items']);
+	}
+
+	public getConsumableStats(): ConsumableStat[] {
+		if (!this.stats() || ![ItemType.Food, ItemType.Potion].includes(this.type()!)) {
+			return [];
+		}
+
+
+		return this.stats()!.consumableStats;
 	}
 }

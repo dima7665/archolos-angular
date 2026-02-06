@@ -1,9 +1,8 @@
 <div>
-	<!-- <nav>
-		<a routerLink="add">Create item</a>
-	</nav> -->
-
-	<p>Item list</p>
+	<div style="display: flex; align-items: center; justify-content: space-between">
+		<p>Item list</p>
+		<a routerLink="/items/add" [queryParams]="{ type: selectedType() }">Create item</a>
+	</div>
 
 	<mat-form-field>
 		<mat-label>Type of items</mat-label>
