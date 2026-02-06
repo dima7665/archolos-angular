@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { itemTypeOptions } from '../../constants/item-option';
 import { ItemForm } from '../../form/item.form';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +13,8 @@ import { ItemType } from '../../enums/item-type.enum';
 import { ConsumableInfoFormComponent } from '../../modules/food/components/consumable-info-form/consumable-info-form.component';
 import { ItemFormService } from './service/item-form.service';
 import { ConsumableStat } from '../../interfaces/consumable.interface';
+import { SubSink } from 'subsink';
+import { map } from 'rxjs';
 
 @Component({
 	selector: 'item-add',
@@ -28,14 +30,17 @@ import { ConsumableStat } from '../../interfaces/consumable.interface';
 	],
 	providers: [ItemFormService],
 })
-export class ItemAddComponent {
-	public readonly formGroup = new ItemForm({ type: this.route.snapshot.queryParams['type'] }).formGroup;
+export class ItemAddComponent implements OnInit {
+	public readonly type = toSignal(this.route.queryParams.pipe(map((params) => params['type'])));
 
-	public readonly type = toSignal(this.formGroup.controls.type.valueChanges);
+	public readonly formGroup = new ItemForm({ type: this.type() }).formGroup;
+
 	public readonly stats = signal<Nullable<ItemIncludes>>(null);
 
 	public readonly itemTypeOptions = itemTypeOptions;
 	public readonly ItemType = ItemType;
+
+	private readonly subs = new SubSink();
 
 	constructor(
 		private readonly router: Router,
@@ -43,6 +48,12 @@ export class ItemAddComponent {
 		private readonly itemApi: ItemApi,
 		private readonly itemFormService: ItemFormService
 	) {}
+
+	public ngOnInit(): void {
+		this.subs.sink = this.formGroup.controls.type.valueChanges.subscribe((type) =>
+			this.router.navigate([], { queryParams: { type } })
+		);
+	}
 
 	public async onSubmit(): Promise<void> {
 		// console.log('add', this.itemFormService.invalid, this.itemFormService.getValue(this.type()));
@@ -55,7 +66,10 @@ export class ItemAddComponent {
 
 		// console.log('VALID');
 		// return;
-		const res = await this.itemApi.add({...this.formGroup.value, ...this.itemFormService.getValue(this.type())} as ItemCreateData);
+		const res = await this.itemApi.add({
+			...this.formGroup.value,
+			...this.itemFormService.getValue(this.type()),
+		} as ItemCreateData);
 		console.log('submit', res);
 
 		// TODO: could return error if duplicate stats (consumableStats)
@@ -72,7 +86,6 @@ export class ItemAddComponent {
 		if (!this.stats() || ![ItemType.Food, ItemType.Potion].includes(this.type()!)) {
 			return [];
 		}
-
 
 		return this.stats()!.consumableStats;
 	}

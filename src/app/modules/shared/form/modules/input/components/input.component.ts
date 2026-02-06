@@ -37,7 +37,6 @@ export class AppInputComponent implements ControlValueAccessor, ValidationContro
 	private onChange!: (value: string | number | null) => void;
 
 	public writeValue(value: string | null): void {
-		console.log('writeValue', typeof value, value);
 		this.value.set(value || '');
 	}
 
