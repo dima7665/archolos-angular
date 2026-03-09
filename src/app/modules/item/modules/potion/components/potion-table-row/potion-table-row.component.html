@@ -1,9 +1,0 @@
-<td>{{ item().id }}</td>
-<td>{{ item().name }}</td>
-<td>{{ item().price }}</td>
-<td>{{ item().description }}</td>
-<td>
-	@for (stat of item().consumableStats; track stat) {
-		<p>{{ stat.stat }}: {{ stat.value }}</p>
-	}
-</td>

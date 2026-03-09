@@ -1,6 +1,6 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { UserService } from 'app/modules/user/services/user.service';
+import { UserService } from '@app/modules/user/services/user.service';
 
 export const jwtInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
 	const userService = inject(UserService);

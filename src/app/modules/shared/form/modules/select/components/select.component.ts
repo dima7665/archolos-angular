@@ -1,10 +1,10 @@
-import { Component, forwardRef, input, signal } from '@angular/core';
+import { Component, forwardRef, input, model, signal } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { ValidationControlElement } from 'app/modules/shared/validation/interfaces/validation.interface';
-import { VALIDATION_CONTROL_ELEMENT } from 'app/modules/shared/validation/token/validation.token';
-import { ValidationModule } from 'app/modules/shared/validation/validation.module';
+import { ValidationControlElement } from '@app/modules/shared/validation/interfaces/validation.interface';
+import { VALIDATION_CONTROL_ELEMENT } from '@app/modules/shared/validation/token/validation.token';
+import { ValidationModule } from '@app/modules/shared/validation/validation.module';
 
 @Component({
 	selector: 'app-select',
@@ -18,10 +18,11 @@ import { ValidationModule } from 'app/modules/shared/validation/validation.modul
 })
 export class AppSelectComponent implements ControlValueAccessor, ValidationControlElement {
 	public readonly options = input.required<any[]>();
+	public readonly label = input.required<string>();
 
 	public control!: FormControl;
 
-	public readonly value = signal('');
+	public readonly value = model('');
 
 	//
 	public errorMessage = signal('');
@@ -47,9 +48,9 @@ export class AppSelectComponent implements ControlValueAccessor, ValidationContr
 	}
 
 	public onSelection(event: MatSelectChange): void {
-        this.markAsTouched();
-		this.onChange(event.value);
-		this.onTouch();
+		this.markAsTouched();
+		this.onChange ? this.onChange(event.value) : (this.value.set(event.value));
+		this.onTouch?.();
 	}
 
 	public onBlur(): void {
@@ -58,7 +59,7 @@ export class AppSelectComponent implements ControlValueAccessor, ValidationContr
 
 	private markAsTouched() {
 		if (!this.isTouched) {
-			this.onTouch();
+			this.onTouch?.();
 			this.isTouched = true;
 		}
 	}

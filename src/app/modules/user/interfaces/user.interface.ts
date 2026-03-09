@@ -10,7 +10,7 @@ export interface Tokens {
 }
 
 export enum UserRole {
-    Super = 'SUPERADMIN',
-    Admin = 'ADMIN',
-    Other = 'OTHER',
+    Super = '1',
+    Admin = '2',
+    Other = '3',
 }

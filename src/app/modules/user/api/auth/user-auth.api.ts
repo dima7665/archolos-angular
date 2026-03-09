@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CommonHttpOptions } from 'app/core/http/interfaces/common-http-options.interface';
-import { ApiService } from 'app/core/http/modules/api/api.service';
+import { CommonHttpOptions } from '@app/core/http/interfaces/common-http-options.interface';
+import { ApiService } from '@app/core/http/modules/api/api.service';
 import { Tokens, User } from '../../interfaces/user.interface';
 import { firstValueFrom } from 'rxjs';
 

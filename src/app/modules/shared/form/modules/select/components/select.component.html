@@ -1,5 +1,5 @@
 <mat-form-field [class.invalidValue]="isShowError()">
-	<mat-label>Type</mat-label>
+	<mat-label>{{ label() }}</mat-label>
 	<mat-select
 		[value]="value()"
 		[required]="isRequired()"
@@ -11,8 +11,8 @@
 			<mat-option>-</mat-option>
 		}
 
-		@for (type of options(); track type.key) {
-			<mat-option [value]="type.key">{{ type.text }}</mat-option>
+		@for (option of options(); track option.key) {
+			<mat-option [value]="option.key">{{ option.text }}</mat-option>
 		}
 	</mat-select>
 </mat-form-field>

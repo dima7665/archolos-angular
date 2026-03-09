@@ -1,20 +1,21 @@
 export interface ConsumableStat {
+	id: number;
 	consumableId: number;
 	duration?: Nullable<number>;
 	isPercentage: boolean;
 	isPermanent: boolean;
-	stat: ConsumableStatType;
+	name: ConsumableStatType;
 	value: number;
 }
 
 export enum ConsumableStatType {
-	Health = 'health',
-	Mana = 'mana',
-	Strength = 'strength',
-	Dexterity = 'dexterity',
-	Spellpower = 'spellpower',
-	Experience = 'exp',
-	Armor = 'armor',
-	Speed = 'speed',
-	Underwater = 'underwater',
+	Health = 1, // 'health',
+	Mana = 2, // 'mana',
+	Strength = 3, //'strength',
+	Dexterity = 4, // 'dexterity',
+	Armor = 5, // 'armor',
+	Spellpower = 6, // 'spellpower',
+	Experience = 7, // 'exp',
+	Speed = 8, // 'speed',
+	Underwater = 9, // 'underwater',
 }

@@ -14,13 +14,13 @@ export const itemRoutes: Routes = [
 		children: [
 			{
 				path: ItemType.Food,
-				loadComponent: () => import('./modules/food/list/food-list/food-list').then((c) => c.FoodListComponent),
+				loadComponent: () => import('./modules/consumable/modules/food/list/food-list/food-list').then((c) => c.FoodListComponent),
 			},
 
 			{
 				path: ItemType.Potion,
 				loadComponent: () =>
-					import('./modules/potion/list/potion-list/potion-list').then((c) => c.PotionListComponent),
+					import('./modules/consumable/modules/potion/list/potion-list/potion-list').then((c) => c.PotionListComponent),
 			},
 
 			{ path: '**', redirectTo: 'food' },

@@ -2,9 +2,9 @@ import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ValidationModule } from 'app/modules/shared/validation/validation.module';
-import { VALIDATION_CONTROL_ELEMENT } from 'app/modules/shared/validation/token/validation.token';
-import { ValidationControlElement } from 'app/modules/shared/validation/interfaces/validation.interface';
+import { ValidationModule } from '@app/modules/shared/validation/validation.module';
+import { VALIDATION_CONTROL_ELEMENT } from '@app/modules/shared/validation/token/validation.token';
+import { ValidationControlElement } from '@app/modules/shared/validation/interfaces/validation.interface';
 
 @Component({
 	selector: 'app-input',

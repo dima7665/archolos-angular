@@ -1,24 +1,9 @@
-<form [formGroup]="formGroup" class="form">
-	<app-select controlValidation [options]="itemTypeOptions" formControlName="type"></app-select>
+<app-select label="Type of item" [options]="options" [(value)]="selectedType"></app-select>
 
-	<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
-
-	<app-input controlValidation label="Price" type="number" formControlName="price"></app-input>
-
-	<app-input controlValidation label="Ingame ID" formControlName="gameItemId"></app-input>
-
-	<app-input controlValidation label="Description" formControlName="description"></app-input>
-
-	<app-input controlValidation label="Additional info" formControlName="additionalInfo"></app-input>
-</form>
-
-@switch (type()) {
+@switch (selectedType()) {
 	@case (ItemType.Food)
 	@case (ItemType.Potion) {
-		<consumable-info-form [data]="getConsumableStats()"></consumable-info-form>
+		<consumable-form></consumable-form>
 	}
 	@case (ItemType.Weapon) {}
 }
-
-<button (click)="onCancel()">Cancel</button>
-<button (click)="onSubmit()">Add</button>

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserAuthApi } from '../../api/auth/user-auth.api';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { TypedForm } from 'app/modules/shared/form/interfaces/typed-form.interface';
+import { TypedForm } from '@app/modules/shared/form/interfaces/typed-form.interface';
 
 interface LoginForm {
 	email: string;

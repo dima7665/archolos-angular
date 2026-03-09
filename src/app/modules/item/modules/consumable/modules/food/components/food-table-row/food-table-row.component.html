@@ -1,0 +1,11 @@
+<td>{{ item().id }}</td>
+<td>{{ item().name }}</td>
+<td>{{ item().price }}</td>
+<td>{{ item().description }}</td>
+<td>
+	@for (stat of item().consumableStats; track stat) {
+		<p class="d-flex justify-content-between">
+			<span>{{ consumableStatI18n[stat.name] }}:</span> <span>{{ stat.value }}</span>
+		</p>
+	}
+</td>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { ItemType } from 'app/modules/item/enums/item-type.enum';
+import { ItemType } from '@app/modules/item/enums/item-type.enum';
 
 @Injectable()
 export class ItemFormService {
@@ -30,7 +30,6 @@ export class ItemFormService {
 
 		(this.formGroup as FormArray).controls.forEach((stat: any) => {
 			const control = stat.controls['consumableId'] as unknown as FormControl;
-			console.log(control.invalid, control.disabled, control.value);
 		});
 	}
 

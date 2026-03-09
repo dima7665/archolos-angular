@@ -18,7 +18,7 @@ export class AppConfigService {
     // private readonly APP_CONFIG = inject(APP_CONFIG);
 
     public get externalApiUrl(): string {
-		return 'http://localhost:3333';
+		return 'http://localhost:5080/api';
 		// return this.APP_CONFIG.external_api_url;
 	}
 
