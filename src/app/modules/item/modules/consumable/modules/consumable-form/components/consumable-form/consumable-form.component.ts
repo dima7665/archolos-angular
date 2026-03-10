@@ -12,6 +12,7 @@ import { ConsumableType, ItemType } from '@app/modules/item/enums/item-type.enum
 @Component({
 	selector: 'consumable-form',
 	templateUrl: './consumable-form.component.html',
+	styleUrl: './consumable-form.component.scss',
 	imports: [ReactiveFormsModule, AppInputComponent, ValidationModule, ConsumableInfoFormComponent],
 })
 export class ConsumableFormComponent {
@@ -28,12 +29,14 @@ export class ConsumableFormComponent {
 	) {}
 
 	public async onSubmit(): Promise<void> {
+		// TODO: amount input (for price - only numbers allowed)
+		// TODO: also add backend error validation higlights
+console.log(this.formGroup.value);
 		if (this.formGroup.invalid) {
 			this.formGroup.triggerValidation();
 			return;
 		}
 
-		// TODO: type
 		// TODO: fix sources - should not be present if empty ([] - became {} in database, should be null)
 		const res = await this.consumableApi.add({
 			...this.formGroup.value,
@@ -42,8 +45,8 @@ export class ConsumableFormComponent {
 
 		// TODO: could return error if duplicate stats (consumableStats)
 
-		return;
-		this.router.navigate(['items']);
+		// return;
+		this.router.navigate(['items', this.getType()]);
 	}
 
 	public onCancel(): void {

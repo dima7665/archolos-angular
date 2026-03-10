@@ -1,0 +1,5 @@
+<mat-slide-toggle [checked]="value()" (change)="onToggleChange($event)">
+    <ng-content></ng-content>
+</mat-slide-toggle>
+
+<validation-error [error]="errorMessage()" [isShow]="isShowError()" />

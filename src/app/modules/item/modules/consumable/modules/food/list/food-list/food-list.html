@@ -1,3 +1,7 @@
 <p>Food</p>
 
 <food-table [items]="items()"></food-table>
+
+@if (pagination()) {
+    <app-pagination [data]="pagination()!" (pageChange)="onPageChange($event)"></app-pagination>
+}

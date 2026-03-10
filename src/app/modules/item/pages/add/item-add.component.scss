@@ -2,3 +2,9 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
+
+.controls {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: 20px;
+}

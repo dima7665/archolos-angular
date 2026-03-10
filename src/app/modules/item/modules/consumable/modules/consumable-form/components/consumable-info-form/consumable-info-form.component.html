@@ -1,10 +1,14 @@
 <form>
 	@for (statFormGroup of formGroup.controls; track statFormGroup) {
-		<div [formGroup]="statFormGroup">
+		<div class="controls" [formGroup]="statFormGroup">
 			<app-select controlValidation [options]="statTypeOptions" label="Type" formControlName="name"></app-select>
 
 			<app-input controlValidation label="Value" type="number" formControlName="value"></app-input>
 
+			<app-switch controlValidation formControlName="isPercentage">Value in percents</app-switch>
+			
+			<app-switch controlValidation formControlName="isPermanent">Permanent bonus</app-switch>
+			
 			<app-input controlValidation label="Duration" type="number" formControlName="duration"></app-input>
 		</div>
 

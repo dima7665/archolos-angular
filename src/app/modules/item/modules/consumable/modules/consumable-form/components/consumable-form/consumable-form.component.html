@@ -1,19 +1,18 @@
-
 <form [formGroup]="formGroup" class="form">
-	<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
+	<div class="base-controls">
+		<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
 
-	<app-input controlValidation label="Price" type="number" formControlName="price"></app-input>
+		<app-input controlValidation label="Price" type="number" formControlName="price"></app-input>
 
-	<app-input controlValidation label="Ingame ID" formControlName="gameItemId"></app-input>
+		<app-input controlValidation label="Description" formControlName="description"></app-input>
+		
+		<app-input controlValidation label="Ingame ID" formControlName="gameItemId"></app-input>
 
-	<app-input controlValidation label="Description" formControlName="description"></app-input>
+		<app-input controlValidation label="Additional info" formControlName="additionalInfo"></app-input>
+	</div>
 
-	<app-input controlValidation label="Additional info" formControlName="additionalInfo"></app-input>
-
-    <consumable-info-form [data]="stats()"></consumable-info-form>
+	<consumable-info-form [data]="stats()"></consumable-info-form>
 </form>
-
 
 <button (click)="onCancel()">Cancel</button>
 <button (click)="onSubmit()">Add</button>
-

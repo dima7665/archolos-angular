@@ -1,0 +1,10 @@
+<mat-paginator
+	[length]="data().count"
+	[pageSize]="data().perPage"
+	[pageSizeOptions]="[3, 5, 10, 20]"
+    [pageIndex]="pageIndex()"
+    [disabled]="disabled()"
+	[showFirstLastButtons]="showFirstLastButtons()"
+	aria-label="Select page"
+    (page)="onPageChange($event)"
+></mat-paginator>

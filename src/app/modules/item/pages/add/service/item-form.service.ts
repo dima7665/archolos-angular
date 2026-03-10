@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ItemType } from '@app/modules/item/enums/item-type.enum';
 
+// TODO remove?
 @Injectable()
 export class ItemFormService {
 	public readonly stats = {};

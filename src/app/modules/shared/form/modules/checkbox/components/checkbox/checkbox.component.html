@@ -1,0 +1,5 @@
+<mat-checkbox [checked]="value()" (change)="onToggleChange($event)">
+    <ng-content></ng-content>
+</mat-checkbox>
+
+<validation-error [error]="errorMessage()" [isShow]="isShowError()" />

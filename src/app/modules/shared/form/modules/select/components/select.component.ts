@@ -1,5 +1,5 @@
 import { Component, forwardRef, input, model, signal } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { ValidationControlElement } from '@app/modules/shared/validation/interfaces/validation.interface';
@@ -19,8 +19,6 @@ import { ValidationModule } from '@app/modules/shared/validation/validation.modu
 export class AppSelectComponent implements ControlValueAccessor, ValidationControlElement {
 	public readonly options = input.required<any[]>();
 	public readonly label = input.required<string>();
-
-	public control!: FormControl;
 
 	public readonly value = model('');
 

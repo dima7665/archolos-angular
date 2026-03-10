@@ -1,4 +1,6 @@
-<app-select label="Type of item" [options]="options" [(value)]="selectedType"></app-select>
+<div class="controls">
+	<app-select label="Type of item" [options]="options" [(value)]="selectedType"></app-select>
+</div>
 
 @switch (selectedType()) {
 	@case (ItemType.Food)

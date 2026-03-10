@@ -8,6 +8,10 @@
 		td,
 		th {
 			text-align: start;
+
+			&:last-child {
+				text-align: center;
+			}
 		}
 
 		thead {

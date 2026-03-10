@@ -7,11 +7,13 @@ import { AppInputComponent } from '@app/modules/shared/form/modules/input/compon
 import { AppSelectComponent } from '@app/modules/shared/form/modules/select/components/select.component';
 import { ValidationModule } from '@app/modules/shared/validation/validation.module';
 import { ConsumableForm } from '../../forms/consumable.form';
+import { SwitchComponent } from '@app/modules/shared/form/modules/switch/components/switch/switch.component';
 
 @Component({
 	selector: 'consumable-info-form',
 	templateUrl: './consumable-info-form.component.html',
-	imports: [ReactiveFormsModule, AppInputComponent, AppSelectComponent, ValidationModule],
+	styleUrl: './consumable-info-form.component.scss',
+	imports: [ReactiveFormsModule, AppInputComponent, AppSelectComponent, SwitchComponent, ValidationModule],
 })
 export class ConsumableInfoFormComponent {
 	public readonly data = input.required<ConsumableStat[]>();
@@ -22,6 +24,8 @@ export class ConsumableInfoFormComponent {
 	public readonly statTypeOptions = consumableStatOptions;
 
 	private readonly _parentFormGroupDirective = inject(FormGroupDirective);
+
+	// TODO: disable duration field if isPermanent=true
 
 	public ngOnInit(): void {
 		this.formGroup = (this._parentFormGroupDirective.form as ConsumableForm['formGroup']).controls

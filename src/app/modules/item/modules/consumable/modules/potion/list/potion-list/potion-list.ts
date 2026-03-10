@@ -25,7 +25,7 @@ export class PotionListComponent implements OnInit, OnDestroy {
 			this.items.set(data);
 		});
 
-		this.loadData$.next({ pagination: new PaginationPayload(), filter: { type: ConsumableType.Food } });
+		this.loadData$.next({ pagination: new PaginationPayload(), filter: { type: ConsumableType.Potion } });
 	}
 
 	public ngOnDestroy(): void {

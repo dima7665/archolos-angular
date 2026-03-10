@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ValidationModule } from '@app/modules/shared/validation/validation.module';
 import { ItemApi } from '../../api/item.api';
 import { ItemType } from '../../enums/item-type.enum';
-import { ItemFormService } from './service/item-form.service';
 import { AppSelectComponent } from '@app/modules/shared/form/modules/select/components/select.component';
 import { ConsumableFormComponent } from '../../modules/consumable/modules/consumable-form/components/consumable-form/consumable-form.component';
 
@@ -15,7 +14,6 @@ import { ConsumableFormComponent } from '../../modules/consumable/modules/consum
 	styleUrl: 'item-add.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [ReactiveFormsModule, ValidationModule, ConsumableFormComponent, AppSelectComponent],
-	providers: [ItemFormService],
 })
 export class ItemAddComponent {
 	public readonly options = itemTypeOptions;
@@ -26,8 +24,7 @@ export class ItemAddComponent {
 	constructor(
 		private readonly router: Router,
 		private readonly route: ActivatedRoute,
-		private readonly itemApi: ItemApi,
-		private readonly itemFormService: ItemFormService
+		private readonly itemApi: ItemApi
 	) {
 		effect(() => {
 			this.router.navigate([], { relativeTo: this.route, queryParams: {type: this.selectedType()} });
