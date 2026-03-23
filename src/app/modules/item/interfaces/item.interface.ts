@@ -16,3 +16,7 @@ export interface ItemIncludes {
 }
 
 export type ItemCreateData = Omit<Item, 'id'>;
+
+export interface ItemFilter {
+	name?: string;
+}

@@ -31,13 +31,14 @@ export class ConsumableFormComponent {
 	public async onSubmit(): Promise<void> {
 		// TODO: amount input (for price - only numbers allowed)
 		// TODO: also add backend error validation higlights
-console.log(this.formGroup.value);
+
 		if (this.formGroup.invalid) {
 			this.formGroup.triggerValidation();
 			return;
 		}
 
 		// TODO: fix sources - should not be present if empty ([] - became {} in database, should be null)
+
 		const res = await this.consumableApi.add({
 			...this.formGroup.value,
 			type: this.getType(),
@@ -45,12 +46,11 @@ console.log(this.formGroup.value);
 
 		// TODO: could return error if duplicate stats (consumableStats)
 
-		// return;
-		this.router.navigate(['items', this.getType()]);
+		this.router.navigate(['items', this.route.snapshot.queryParams['type']]);
 	}
 
 	public onCancel(): void {
-		this.router.navigate(['items']);
+		this.router.navigate(['items', this.route.snapshot.queryParams['type']]);
 	}
 
 	private getType(): ConsumableType {
