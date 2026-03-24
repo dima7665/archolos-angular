@@ -6,12 +6,13 @@ import { AppInputComponent } from '@app/modules/shared/form/modules/input/compon
 import { MiscApi } from '../../api/misc.api';
 import { ItemForm } from '@app/modules/item/form/item.form';
 import { ItemType } from '@app/modules/item/enums/item-type.enum';
+import { ValidationModule } from '@app/modules/shared/validation/validation.module';
 
 @Component({
 	selector: 'misc-form',
 	templateUrl: './misc-form.component.html',
 	styleUrl: './misc-form.component.scss',
-	imports: [ReactiveFormsModule, AppInputComponent],
+	imports: [ReactiveFormsModule, AppInputComponent, ValidationModule],
 })
 export class MiscFormComponent {
 	public readonly item = input<Nullable<Item>>(null);

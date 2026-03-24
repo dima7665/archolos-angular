@@ -5,7 +5,7 @@ import { ItemForm } from '@app/modules/item/form/item.form';
 import { ConsumableStatForm } from './consumable-stat.form';
 
 export class ConsumableForm {
-private readonly baseFormGroup = new ItemForm(this.data).formGroup;
+	private readonly baseFormGroup = new ItemForm(this.data).formGroup;
 
 	public formGroup = new FormGroup<TypedForm<Omit<ConsumableItem, 'id' | 'asIngredient' | 'recipes'>>>({
 		...this.baseFormGroup.controls,

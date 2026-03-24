@@ -4,11 +4,11 @@ import { MiscTableRowComponent } from '../misc-table-row/misc-table-row.componen
 import { TableModule } from '@app/modules/shared/table/table.module';
 
 @Component({
-  selector: 'misc-table',
-  imports: [TableModule, MiscTableRowComponent],
-  templateUrl: './misc-table.component.html',
-  styleUrl: './misc-table.component.scss',
+	selector: 'misc-table',
+	imports: [TableModule, MiscTableRowComponent],
+	templateUrl: './misc-table.component.html',
+	styleUrl: './misc-table.component.scss',
 })
 export class MiscTableComponent {
-public readonly items = input.required<Item[]>();
+	public readonly items = input.required<Item[]>();
 }

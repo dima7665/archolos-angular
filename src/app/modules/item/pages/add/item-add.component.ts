@@ -6,14 +6,22 @@ import { ValidationModule } from '@app/modules/shared/validation/validation.modu
 import { ItemType } from '../../enums/item-type.enum';
 import { AppSelectComponent } from '@app/modules/shared/form/modules/select/components/select.component';
 import { ConsumableFormComponent } from '../../modules/consumable/modules/consumable-form/components/consumable-form/consumable-form.component';
-import { MiscFormComponent } from '../../modules/misc/pages/add/misc-form.component';
+import { MiscFormComponent } from '../../modules/misc/pages/form/misc-form.component';
+import { WeaponFormComponent } from '../../modules/weapon/pages/form/weapon-form.component';
 
 @Component({
 	selector: 'item-add',
 	templateUrl: 'item-add.component.html',
 	styleUrl: 'item-add.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [ReactiveFormsModule, ValidationModule, ConsumableFormComponent, MiscFormComponent, AppSelectComponent],
+	imports: [
+		ReactiveFormsModule,
+		ValidationModule,
+		ConsumableFormComponent,
+		MiscFormComponent,
+		WeaponFormComponent,
+		AppSelectComponent,
+	],
 })
 export class ItemAddComponent {
 	public readonly options = itemTypeOptions;

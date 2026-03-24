@@ -34,9 +34,14 @@ export const itemRoutes: Routes = [
 				path: ItemType.Other,
 				data: { typeX: ItemType.Other },
 				loadComponent: () =>
-					import('./modules/misc/pages/list/misc-list.component').then(
-						(c) => c.MiscListComponent
-					),
+					import('./modules/misc/pages/list/misc-list.component').then((c) => c.MiscListComponent),
+			},
+
+			{
+				path: ItemType.Weapon,
+				data: { typeX: ItemType.Weapon },
+				loadComponent: () =>
+					import('./modules/weapon/pages/list/weapon-list.component').then((c) => c.WeaponListComponent),
 			},
 
 			{ path: '**', redirectTo: 'food' },

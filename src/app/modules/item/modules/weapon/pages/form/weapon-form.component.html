@@ -1,0 +1,49 @@
+<form [formGroup]="formGroup" class="form">
+	<div class="base-controls">
+		<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
+
+		<app-input controlValidation label="Price" type="number" formControlName="price"></app-input>
+
+		<app-input controlValidation label="Ingame ID" formControlName="gameItemId"></app-input>
+
+		<app-input controlValidation label="Description" formControlName="description"></app-input>
+
+		<app-input controlValidation label="Additional info" formControlName="additionalInfo"></app-input>
+	</div>
+
+	<div class="base-controls">
+		<app-select
+			controlValidation
+			[options]="weaponTypeOptions"
+			label="Weapon type"
+			formControlName="type"
+		></app-select>
+
+		<app-select
+			controlValidation
+			[options]="damageTypeOptions"
+			label="Weapon damage type"
+			formControlName="damageType"
+		></app-select>
+
+		<app-input controlValidation label="Weapon damage" formControlName="damage"></app-input>
+
+		<app-select
+			controlValidation
+			[options]="skillTypeOptions"
+			label="Weapon skill"
+			formControlName="skill"
+		></app-select>
+
+		<app-input controlValidation label="Skill requirement" formControlName="skillRequirement"></app-input>
+
+		<app-input controlValidation label="Skill bonus" formControlName="skillBonus"></app-input>
+
+		<app-input controlValidation label="Range" formControlName="range"></app-input>
+
+		<app-input controlValidation label="Armor piercing" formControlName="armorPiercing"></app-input>
+	</div>
+</form>
+
+<button (click)="onCancel()">Cancel</button>
+<button (click)="onSubmit()">Add</button>

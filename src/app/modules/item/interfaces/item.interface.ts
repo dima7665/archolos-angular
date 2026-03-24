@@ -1,5 +1,3 @@
-import { ConsumableStat } from './consumable.interface';
-
 export interface Item {
 	id: number;
 	gameItemId?: Nullable<string>;
@@ -8,14 +6,12 @@ export interface Item {
 	description?: Nullable<string>;
 	additionalInfo?: Nullable<string>;
 	sources: unknown[];
+
+	recipes: any[];
+	asIngredient: any[];
 }
 
-// TODO remove
-export interface ItemIncludes {
-	consumableStats: ConsumableStat[];
-}
-
-export type ItemCreateData = Omit<Item, 'id'>;
+export type ItemCreateData = Omit<Item, 'id' | 'recipes' | 'asIngredient'>;
 
 export interface ItemFilter {
 	name?: string;

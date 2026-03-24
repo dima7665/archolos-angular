@@ -9,7 +9,7 @@ import { MiscTableComponent } from '../../components/misc-table/misc-table.compo
 	selector: 'misc-list',
 	templateUrl: './misc-list.component.html',
 	styleUrl: './misc-list.component.scss',
-  imports: [MiscTableComponent],
+	imports: [MiscTableComponent],
 })
 export class MiscListComponent {
 	public readonly items = signal<Item[]>([]);
