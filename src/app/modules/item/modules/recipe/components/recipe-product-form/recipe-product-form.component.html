@@ -1,0 +1,12 @@
+<p>Item created by recipe</p>
+
+<div [formGroup]="productFormGroup()">
+	<app-select
+		controlValidation
+		[options]="itemTypeOptions"
+		label="Type of product"
+		formControlName="ingredientType"
+	></app-select>
+
+	<app-select controlValidation [options]="itemOptions()" label="Product" formControlName="itemId"></app-select>
+</div>

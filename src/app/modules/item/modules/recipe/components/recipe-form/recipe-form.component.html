@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup" class="form">
+	<div class="base-controls">
+		<app-input controlValidation label="Name" placeholder="Enter name" formControlName="name"></app-input>
+
+		<app-input controlValidation label="Price" type="number" formControlName="price"></app-input>
+
+		<app-input controlValidation label="Description" formControlName="description"></app-input>
+
+		<app-input controlValidation label="Ingame ID" formControlName="gameItemId"></app-input>
+
+		<app-input controlValidation label="Additional info" formControlName="additionalInfo"></app-input>
+	</div>
+
+	<div>
+		<recipe-product-form [productFormGroup]="productForm"></recipe-product-form>
+	</div>
+
+	<div>
+		@for (ingredientForm of ingredientsForm.controls; track ingredientForm) {
+			<recipe-ingredient-form [index]="$index" [ingredientFormGroup]="ingredientForm"></recipe-ingredient-form>
+
+			@if (ingredientsForm.value.length > 1) {
+				<button type="button" (click)="removeIngredient($index)">Remove ingredient</button>
+			}
+		}
+
+		<button type="button" (click)="addIngredient()">Add ingredient</button>
+	</div>
+</form>
+
+<button (click)="onCancel()">Cancel</button>
+<button (click)="onSubmit()">Add</button>

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { FormArray, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { consumableStatOptions } from '@app/modules/item/constants/consumable-stat-option';
 import { ConsumableStatForm } from '@app/modules/item/modules/consumable/modules/consumable-form/forms/consumable-stat.form';
@@ -15,7 +15,7 @@ import { SwitchComponent } from '@app/modules/shared/form/modules/switch/compone
 	styleUrl: './consumable-info-form.component.scss',
 	imports: [ReactiveFormsModule, AppInputComponent, AppSelectComponent, SwitchComponent, ValidationModule],
 })
-export class ConsumableInfoFormComponent {
+export class ConsumableInfoFormComponent implements OnInit {
 	public readonly data = input.required<ConsumableStat[]>();
 	public readonly itemId = computed(() => (this.data().length ? this.data()[0].consumableId : null));
 

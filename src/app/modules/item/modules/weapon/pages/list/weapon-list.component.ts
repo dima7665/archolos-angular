@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { WeaponTableComponent } from '../../components/weapon-table/weapon-table.component';
 import { Subject, switchMap } from 'rxjs';
 import { WeaponApi } from '../../api/weapon.api';
@@ -12,7 +12,7 @@ import { WeaponItem } from '../../interfaces/weapon.interface';
 	styleUrl: './weapon-list.component.scss',
 	imports: [WeaponTableComponent],
 })
-export class WeaponListComponent {
+export class WeaponListComponent implements OnInit, OnDestroy {
 	public readonly items = signal<WeaponItem[]>([]);
 
 	private readonly loadData$ = new Subject<ListPayload<WeaponFilter>>();

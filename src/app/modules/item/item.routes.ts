@@ -44,6 +44,13 @@ export const itemRoutes: Routes = [
 					import('./modules/weapon/pages/list/weapon-list.component').then((c) => c.WeaponListComponent),
 			},
 
+			{
+				path: ItemType.Recipe,
+				data: { typeX: ItemType.Recipe },
+				loadComponent: () =>
+					import('./modules/recipe/pages/list/recipe-list.component').then((c) => c.RecipeListComponent),
+			},
+
 			{ path: '**', redirectTo: 'food' },
 		],
 	},

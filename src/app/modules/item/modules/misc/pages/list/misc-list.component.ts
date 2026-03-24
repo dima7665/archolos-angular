@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Item, ItemFilter } from '@app/modules/item/interfaces/item.interface';
 import { ListPayload, PaginationPayload } from '@app/modules/shared/pagination/interfaces/pagination.interface';
 import { Subject, switchMap } from 'rxjs';
@@ -11,7 +11,7 @@ import { MiscTableComponent } from '../../components/misc-table/misc-table.compo
 	styleUrl: './misc-list.component.scss',
 	imports: [MiscTableComponent],
 })
-export class MiscListComponent {
+export class MiscListComponent implements OnInit, OnDestroy {
 	public readonly items = signal<Item[]>([]);
 
 	private readonly loadData$ = new Subject<ListPayload<ItemFilter>>();

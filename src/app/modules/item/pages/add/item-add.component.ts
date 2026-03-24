@@ -8,6 +8,7 @@ import { AppSelectComponent } from '@app/modules/shared/form/modules/select/comp
 import { ConsumableFormComponent } from '../../modules/consumable/modules/consumable-form/components/consumable-form/consumable-form.component';
 import { MiscFormComponent } from '../../modules/misc/pages/form/misc-form.component';
 import { WeaponFormComponent } from '../../modules/weapon/pages/form/weapon-form.component';
+import { RecipeFormComponent } from '../../modules/recipe/components/recipe-form/recipe-form.component';
 
 @Component({
 	selector: 'item-add',
@@ -20,6 +21,7 @@ import { WeaponFormComponent } from '../../modules/weapon/pages/form/weapon-form
 		ConsumableFormComponent,
 		MiscFormComponent,
 		WeaponFormComponent,
+		RecipeFormComponent,
 		AppSelectComponent,
 	],
 })

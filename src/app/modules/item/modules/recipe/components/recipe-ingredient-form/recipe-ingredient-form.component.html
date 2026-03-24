@@ -1,0 +1,18 @@
+<p>Ingredient #{{ index() + 1 }}</p>
+<div [formGroup]="ingredientFormGroup()">
+	<app-select
+		controlValidation
+		[options]="ingredientTypeOptions"
+		label="Type of ingredient"
+		formControlName="ingredientType"
+	></app-select>
+
+	<app-select
+		controlValidation
+		[options]="ingredientOptions()"
+		label="Ingredient"
+		formControlName="itemId"
+	></app-select>
+
+	<app-input controlValidation label="Quantity" formControlName="quantity"></app-input>
+</div>
