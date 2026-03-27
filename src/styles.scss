@@ -5,6 +5,8 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+@use 'ngx-toastr/toastr';
+
 html {
 	height: 100%;
 	@include mat.theme(
