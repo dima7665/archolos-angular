@@ -1,3 +1,7 @@
 <p>List of weapons</p>
 
 <weapon-table [items]="items()"></weapon-table>
+
+@if (pagination()) {
+    <app-pagination [data]="pagination()!" (pageChange)="onPageChange($event)"></app-pagination>
+}

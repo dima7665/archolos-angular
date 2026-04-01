@@ -56,8 +56,6 @@ export class LoginComponent {
 
 	public async test(): Promise<void> {
 		// console.log(this.localStorageService.isAccessTokenExpiringSoon());
-		// const res = await this.loginApi.test({ withCredentials: true });
-		const res = await this.loginApi.getCurrentUser();
-		console.log('user: ', res);
+		console.log('test: ');
 	}
 }

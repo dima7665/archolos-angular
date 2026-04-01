@@ -1,3 +1,7 @@
 <p>List of recipes</p>
 
 <recipe-table [items]="items()"></recipe-table>
+
+@if (pagination()) {
+    <app-pagination [data]="pagination()!" (pageChange)="onPageChange($event)"></app-pagination>
+}

@@ -1,3 +1,7 @@
 <p>List of potions</p>
 
 <misc-table [items]="items()"></misc-table>
+
+@if (pagination()) {
+    <app-pagination [data]="pagination()!" (pageChange)="onPageChange($event)"></app-pagination>
+}
