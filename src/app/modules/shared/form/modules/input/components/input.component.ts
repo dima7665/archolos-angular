@@ -1,4 +1,4 @@
-import { Component, forwardRef, input, signal } from '@angular/core';
+import { Component, forwardRef, input, model, signal } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -23,7 +23,7 @@ export class AppInputComponent implements ControlValueAccessor, ValidationContro
 
 	public control!: FormControl;
 
-	public readonly value = signal('');
+	public readonly value = model<string | number>('');
 
 	//
 	public readonly errorMessage = signal('');
@@ -56,8 +56,11 @@ export class AppInputComponent implements ControlValueAccessor, ValidationContro
 		const value = event.target.value.trim();
 
 		this.markAsTouched();
-		this.onChange(this.type() === 'number' ? parseInt(value) : value);
-		this.onTouch();
+
+		const newValue = this.type() === 'number' ? parseInt(value) : value;
+		this.onChange ? this.onChange(newValue) : (this.value.set(newValue));
+
+		this.onTouch?.();
 	}
 
 	public onBlur(): void {
@@ -66,7 +69,7 @@ export class AppInputComponent implements ControlValueAccessor, ValidationContro
 
 	private markAsTouched() {
 		if (!this.isTouched) {
-			this.onTouch();
+			this.onTouch?.();
 			this.isTouched = true;
 		}
 	}

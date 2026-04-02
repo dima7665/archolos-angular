@@ -15,7 +15,9 @@ export class UserAuthApi {
 	constructor(private readonly apiService: ApiService) {}
 
 	public login(body: unknown, options?: CommonHttpOptions): Promise<LoginResponse> {
-		return firstValueFrom(this.apiService.post<LoginResponse>('/auth/login', body, options));
+		return firstValueFrom(
+			this.apiService.post<LoginResponse>('/auth/login', body, { withCredentials: false, ...options })
+		);
 	}
 
 	public logout(token: string, options?: CommonHttpOptions): Promise<User> {
