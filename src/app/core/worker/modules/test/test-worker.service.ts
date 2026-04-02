@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { WorkerType } from '../../enums/worker-type.enum';
 
 @Injectable({
 	providedIn: 'root',
@@ -43,7 +42,7 @@ export class TestWorkerService {
 		}
 
 		try {
-			this.worker.port.postMessage({ type: WorkerType.Disconnect });
+			this.worker.port.postMessage({ type: 'disconnect' });
 			this.worker.port.close();
 		} catch (error) {
 			console.error('Failed to disconnect from worker:', error);

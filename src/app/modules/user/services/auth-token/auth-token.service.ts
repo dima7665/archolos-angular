@@ -4,36 +4,37 @@ import { LocalStorageService } from '@app/core/storage/services/local-storage.se
 import { BehaviorSubject } from 'rxjs';
 import { Token } from '../../enums/token.enum';
 import { Tokens } from '../../interfaces/user.interface';
+import { UserBroadcastService } from '@app/core/broadcast/user/services/user-broadcast.service';
+import { BroadcastEventKey } from '@app/core/broadcast/enums/broadcast-event.enum';
+import { TokensUpdateBroadcastMessage } from '@app/core/broadcast/user/messages/user-broadcast-auth';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthenticationTokenService {
-	// use 'accessToken' property to set this value
+	// IMPORTANT: use 'accessToken' property to set this value. Same with 'refreshToken'
 	public readonly accessToken$ = new BehaviorSubject<Nullable<string>>(null);
 	public readonly refreshToken$ = new BehaviorSubject<Nullable<string>>(null);
 
-	// private readonly broadcastChannelService = inject(BroadcastChannelService);
-	// private readonly workerConfigEventService = inject(WorkerConfigEventService);
 	private readonly localStorageService = inject(LocalStorageService);
 
-	constructor() {
+	constructor(private readonly userBroadcastService: UserBroadcastService) {
 		this.initData();
+
+		this.userBroadcastService.on(BroadcastEventKey.TokensUpdate).subscribe(({ accessToken, refreshToken }) => {
+			this.accessToken$.next(accessToken);
+			refreshToken && this.refreshToken$.next(refreshToken);
+		});
 	}
 
 	public get accessToken(): Nullable<string> {
-		// return StorageHelper.deserialize(window.localStorage.getItem(Token.AccessToken));
 		return this.localStorageService.get(Token.AccessToken);
 	}
 
 	public set accessToken(accessToken: Nullable<string>) {
+		console.log();
 		this.accessToken$.next(accessToken);
 		this.localStorageService.set(Token.AccessToken, accessToken);
-
-		// this.broadcastChannelService.postMessage<BroadcastConfigEvent>(BroadcastChannelName.Config, {
-		// 	...this.workerConfigEventService.config,
-		// 	accessToken,
-		// });
 	}
 
 	public get refreshToken(): Nullable<string> {
@@ -63,6 +64,8 @@ export class AuthenticationTokenService {
 		if (refreshToken) {
 			this.refreshToken = refreshToken;
 		}
+
+		this.userBroadcastService.sendMessage(new TokensUpdateBroadcastMessage({ accessToken, refreshToken }));
 	}
 
 	public isAccessTokenExpiringSoon(seconds = 30): boolean {

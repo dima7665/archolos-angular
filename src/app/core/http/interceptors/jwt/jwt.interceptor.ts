@@ -10,10 +10,8 @@ import { inject } from '@angular/core';
 import { AuthenticationTokenService } from '@app/modules/user/services/auth-token/auth-token.service';
 import { RefreshAccessService } from '@app/modules/user/services/refresh-access/refresh-access.service';
 import { UserService } from '@app/modules/user/services/user.service';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { IS_TOKEN_REQUEST } from '../../tokens/is-token-request.token';
-import { WorkerTokenError } from '@app/core/worker/errors/worker.error';
-import { WorkerHelper } from '@app/core/worker/helpers/worker.helper';
 
 export const jwtInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
 	if (!request.withCredentials) {
@@ -24,7 +22,6 @@ export const jwtInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>,
 	const authenticationTokenService = inject(AuthenticationTokenService);
 	const refreshAccessService = inject(RefreshAccessService);
 
-	// const jwtToken = request.context.get(JWT_TOKEN);
 	const isTokenRequest = request.context.get(IS_TOKEN_REQUEST);
 	const isAccessToken = authenticationTokenService.accessToken;
 
@@ -64,18 +61,6 @@ export const jwtInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>,
 			return throwError(() => e);
 		})
 	);
-
-	//
-	//
-	//
-
-	// if (request.withCredentials && userService.accessToken()) {
-	// 	const jwtHeader = { Authorization: `Bearer ${userService.accessToken()}` };
-
-	// 	request = request.clone({ setHeaders: jwtHeader });
-	// }
-
-	// return next(request);
 };
 
 export const addToQueue = (
@@ -90,15 +75,13 @@ export const addToQueue = (
 
 const handleTokenError =
 	(refreshAccessService: RefreshAccessService, request: HttpRequest<unknown>) =>
-	(error: HttpErrorResponse | WorkerTokenError): Observable<never> => {
-		const isWorkerError = error instanceof WorkerTokenError;
+	(error: HttpErrorResponse): Observable<never> => {
 		const httpError = error instanceof HttpErrorResponse ? error : null;
 
 		const isUnauthorized =
 			httpError?.status === HttpStatusCode.Unauthorized || httpError?.status === HttpStatusCode.BadRequest;
-		const isSharedWorkerSupported = WorkerHelper.isSharedWorkerSupported();
 
-		const shouldCatch = isWorkerError || (!!httpError && isUnauthorized && !isSharedWorkerSupported);
+		const shouldCatch = !!httpError && isUnauthorized;
 
 		if (shouldCatch) {
 			refreshAccessService.catchErrorToken(request?.url);
